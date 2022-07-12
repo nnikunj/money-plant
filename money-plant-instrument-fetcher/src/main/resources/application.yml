@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: money-plant-investment-fetcher
+
+  data:
+    mongodb:
+      uri: mongodb://root:password123@localhost:27017
+      database: money_plant
+
+server:
+  port: 8080
+
+
