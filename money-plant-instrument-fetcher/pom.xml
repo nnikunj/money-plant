@@ -15,7 +15,9 @@
     <name>money-plant-instrument-fetcher</name>
     <description> To Fetch the List of Instruments(stocks) </description>
     <packaging>jar</packaging>
-
+    <properties>
+        <main.basedir>${project.parent.basedir}</main.basedir>
+    </properties>
     <dependencies>
 
         <dependency>
@@ -23,10 +25,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -20,11 +20,8 @@ public class InstrumentFetcherController {
 
 	@GetMapping("/instrument")
 	public ResponseEntity<InstrumentResponseDto> getInstrumentList() {
-
 		InstrumentResponseDto result = instrumentFetcherService.getInstrumentList();
-
 		return ResponseEntity.ok().body(result);
-
 	}
 
 	@PostMapping("/instrument")
@@ -35,7 +32,7 @@ public class InstrumentFetcherController {
 	}
 
 	@DeleteMapping("/instrument")
-	public ResponseEntity<?> removeInstrument(String stockName) {
+	public ResponseEntity<?> removeInstrument(@RequestBody String stockName) {
 		instrumentFetcherService.removeInstrument(stockName);
 		return ResponseEntity.ok().body("Instrument : " + stockName + " removed successfully");
 	}

@@ -14,6 +14,6 @@ public class InstrumentAddDto {
 
 	@NotNull(message = "At least 1 stock should be present to add")
 	@Size(min = 1, message = "At least 1 stock should be present to add")
-	private List<InstrumentModel> instrumentModelList;
+	private List<String> instrumentModelList;
 
 }
