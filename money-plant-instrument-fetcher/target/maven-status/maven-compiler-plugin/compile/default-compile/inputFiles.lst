@@ -1,8 +1,0 @@
-/Users/mdharmendra/fintech/money-plant/money-plant-instrument-fetcher/src/main/java/com/example/money/plant/investment/fetcher/entity/InstrumentModel.java
-/Users/mdharmendra/fintech/money-plant/money-plant-instrument-fetcher/src/main/java/com/example/money/plant/investment/fetcher/model/InstrumentResponseDto.java
-/Users/mdharmendra/fintech/money-plant/money-plant-instrument-fetcher/src/main/java/com/example/money/plant/investment/fetcher/MoneyPlantInstrumentFetcher.java
-/Users/mdharmendra/fintech/money-plant/money-plant-instrument-fetcher/src/main/java/com/example/money/plant/investment/fetcher/service/InstrumentFetcherService.java
-/Users/mdharmendra/fintech/money-plant/money-plant-instrument-fetcher/src/main/java/com/example/money/plant/investment/fetcher/repository/InstrumentRepository.java
-/Users/mdharmendra/fintech/money-plant/money-plant-instrument-fetcher/src/main/java/com/example/money/plant/investment/fetcher/model/InstrumentAddDto.java
-/Users/mdharmendra/fintech/money-plant/money-plant-instrument-fetcher/src/main/java/com/example/money/plant/investment/fetcher/entity/InstrumentEntity.java
-/Users/mdharmendra/fintech/money-plant/money-plant-instrument-fetcher/src/main/java/com/example/money/plant/investment/fetcher/controller/v1/InstrumentFetcherController.java
