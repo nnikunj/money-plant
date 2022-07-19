@@ -13,23 +13,23 @@ import java.util.Optional;
 @Component
 public class ParameterConverter {
 
-    public TradeParameters convertToTrade(String trade){
-        TradeParameters param = new TradeParameters();
-        param.setParameterName(trade.toUpperCase());
-        return param;
-    }
+	public TradeParameters convertToTrade(String trade) {
+		TradeParameters param = new TradeParameters();
+		param.setParameterName(trade.toUpperCase());
+		return param;
+	}
 
+	public List<TradeParameters> convertMultipleObjectsToParam(ParametersAddDto dto) {
+		List<TradeParameters> tradeParametersList = new ArrayList<>();
+		dto.getTradeParameterList().forEach(trade -> tradeParametersList.add(convertToTrade(trade)));
+		return tradeParametersList;
+	}
 
-    public List<TradeParameters> convertMultipleObjectsToParam(ParametersAddDto dto) {
-        List<TradeParameters> tradeParametersList = new ArrayList<>();
-        dto.getTradeParameterList().forEach( trade -> tradeParametersList.add(convertToTrade(trade)));
-        return  tradeParametersList;
-    }
+	public ParametersResponseDto convertToParamResponseModel(Optional<ParameterEntity> entity) {
+		if (entity.isPresent()) {
+			return new ParametersResponseDto(entity.get().getTradeParametersList());
+		}
+		return new ParametersResponseDto();
+	}
 
-    public ParametersResponseDto convertToParamResponseModel(Optional<ParameterEntity> entity) {
-        if(entity.isPresent()){
-            return new ParametersResponseDto(entity.get().getTradeParametersList());
-        }
-        return new ParametersResponseDto();
-    }
 }

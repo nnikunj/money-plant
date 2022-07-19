@@ -13,17 +13,18 @@ import java.util.List;
 @Document(collection = "trade_parameters")
 public class ParameterEntity {
 
-    @Id
-    private String id;
+	@Id
+	private String id;
 
-    // TODO: Make this name configurable
-    private String name = "TRADE_PARAMETER_LIST";
+	// TODO: Make this name configurable
+	private String name = "TRADE_PARAMETER_LIST";
 
-    private List<TradeParameters> tradeParametersList;
+	private List<TradeParameters> tradeParametersList;
 
-    @CreatedDate
-    private Instant created;
+	@CreatedDate
+	private Instant created;
 
-    @LastModifiedDate
-    private Instant modified;
+	@LastModifiedDate
+	private Instant modified;
+
 }

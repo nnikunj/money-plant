@@ -15,6 +15,7 @@ public class InstrumentEntity {
 
 	@Id
 	private String id;
+
 	// TODO: Make this name configurable
 	private String name = "USER_INSTRUMENT_LIST";
 

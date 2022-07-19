@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserTradeDetailsResponse {
 
-    private InstrumentResponseDto instrumentDetails;
+	private InstrumentResponseDto instrumentDetails;
 
-    private ParametersResponseDto tradeParams;
+	private ParametersResponseDto tradeParams;
 
 }
