@@ -10,20 +10,20 @@ import java.time.Instant;
 import java.util.List;
 
 @Data
-@Document(collection = "instruments")
-public class InstrumentEntity {
+@Document(collection = "trade_parameters")
+public class ParameterEntity {
 
-	@Id
-	private String id;
-	// TODO: Make this name configurable
-	private String name = "USER_INSTRUMENT_LIST";
+    @Id
+    private String id;
 
-	private List<InstrumentModel> instrumentList;
+    // TODO: Make this name configurable
+    private String name = "TRADE_PARAMETER_LIST";
 
-	@CreatedDate
-	protected Instant created;
+    private List<TradeParameters> tradeParametersList;
 
-	@LastModifiedDate
-	protected Instant modified;
+    @CreatedDate
+    private Instant created;
 
+    @LastModifiedDate
+    private Instant modified;
 }

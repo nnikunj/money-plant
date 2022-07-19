@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class InstrumentConverter {
@@ -24,9 +25,12 @@ public class InstrumentConverter {
 		return result;
 	}
 
-	public InstrumentResponseDto convertInstrumentEntityToModel(InstrumentEntity entity) {
-		List<InstrumentModel> list = entity.getInstrumentList();
-		return new InstrumentResponseDto(list);
+	public InstrumentResponseDto convertInstrumentEntityToModel(Optional<InstrumentEntity> entity) {
+		if(entity.isPresent()) {
+			List<InstrumentModel> list = entity.get().getInstrumentList();
+			return new InstrumentResponseDto(list);
+		}
+		return new InstrumentResponseDto();
 	}
 
 }
