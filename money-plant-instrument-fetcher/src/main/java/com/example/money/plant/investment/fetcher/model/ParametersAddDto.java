@@ -1,6 +1,5 @@
 package com.example.money.plant.investment.fetcher.model;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,8 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 public class ParametersAddDto {
 
-    @NotNull(message = "At least 1 stock should be present to add")
-    @Size(min = 1, message = "At least 1 stock should be present to add")
-    private List<String> tradeParameterList;
+	@NotNull(message = "At least 1 stock should be present to add")
+	@Size(min = 1, message = "At least 1 stock should be present to add")
+	private List<String> tradeParameterList;
 
 }

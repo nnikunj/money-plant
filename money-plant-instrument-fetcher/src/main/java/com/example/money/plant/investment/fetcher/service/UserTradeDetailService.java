@@ -15,21 +15,23 @@ import java.util.List;
 @Log4j2
 public class UserTradeDetailService {
 
-    private final InstrumentFetcherService instrumentFetcherService;
-    private final TradeParameterService tradeParameterService;
+	private final InstrumentFetcherService instrumentFetcherService;
 
-    public UserTradeDetailsResponse getUserTradeDetails(){
-        log.info("User Trade Initial Details Request: ");
+	private final TradeParameterService tradeParameterService;
 
-        UserTradeDetailsResponse result = new UserTradeDetailsResponse();
+	public UserTradeDetailsResponse getUserTradeDetails() {
+		log.info("User Trade Initial Details Request: ");
 
-        InstrumentResponseDto instrumentDetails = instrumentFetcherService.getInstrumentList();
+		UserTradeDetailsResponse result = new UserTradeDetailsResponse();
 
-        ParametersResponseDto parametersDetails = tradeParameterService.getTradeParamList();
+		InstrumentResponseDto instrumentDetails = instrumentFetcherService.getInstrumentList();
 
-        result.setInstrumentDetails(instrumentDetails);
-        result.setTradeParams(parametersDetails);
+		ParametersResponseDto parametersDetails = tradeParameterService.getTradeParamList();
 
-        return result;
-    }
+		result.setInstrumentDetails(instrumentDetails);
+		result.setTradeParams(parametersDetails);
+
+		return result;
+	}
+
 }

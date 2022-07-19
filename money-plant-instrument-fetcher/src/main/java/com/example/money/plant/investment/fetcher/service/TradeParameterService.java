@@ -17,84 +17,88 @@ import java.util.*;
 @Log4j2
 public class TradeParameterService {
 
-    private final TradeParameterRepository tradeParameterRepository;
-    private final ParameterConverter parameterConverter;
+	private final TradeParameterRepository tradeParameterRepository;
 
-    private final String tradeParamListObject = "TRADE_PARAMETER_LIST";
+	private final ParameterConverter parameterConverter;
 
-    public void addTradeParameter(ParametersAddDto dto){
-        log.info("Received trade parameter addition request.");
-        log.info("Checking if the parameter already exists.");
+	private final String tradeParamListObject = "TRADE_PARAMETER_LIST";
 
-        Optional<ParameterEntity> searchEntity = Optional.ofNullable(tradeParameterRepository.findParameterEntityByName(tradeParamListObject));
-        if(searchEntity.isEmpty()){
-            log.warn("First time parameter addition");
-            createParameterEntity();
-            searchEntity = Optional.ofNullable(tradeParameterRepository.findParameterEntityByName(tradeParamListObject));
-        }
+	public void addTradeParameter(ParametersAddDto dto) {
+		log.info("Received trade parameter addition request.");
+		log.info("Checking if the parameter already exists.");
 
-        List<TradeParameters> newParamList = parameterConverter.convertMultipleObjectsToParam(dto);
+		Optional<ParameterEntity> searchEntity = Optional
+				.ofNullable(tradeParameterRepository.findParameterEntityByName(tradeParamListObject));
+		if (searchEntity.isEmpty()) {
+			log.warn("First time parameter addition");
+			createParameterEntity();
+			searchEntity = Optional
+					.ofNullable(tradeParameterRepository.findParameterEntityByName(tradeParamListObject));
+		}
 
-        if(searchEntity.isPresent()){
+		List<TradeParameters> newParamList = parameterConverter.convertMultipleObjectsToParam(dto);
 
-            List<TradeParameters> tradeParametersList = searchEntity.get().getTradeParametersList();
+		if (searchEntity.isPresent()) {
 
-            try{
-                newParamList.removeAll(tradeParametersList);
-                Set<TradeParameters> temp = new HashSet<>(newParamList);
-                newParamList.clear();
-                newParamList.addAll(temp);
-                log.info("Adding the following Parameters for Calculation: [ " + newParamList + " ]");
-                tradeParametersList.addAll(newParamList);
-                searchEntity.get().setTradeParametersList(tradeParametersList);
-                tradeParameterRepository.save(searchEntity.get());
-            }
-            catch (Exception e) {
-                log.error("Unable to add Instrument due to : ", e);
-                throw new RuntimeException("Trade Parameter Addition Failure");
-            }
-        }
-        else throw new RuntimeException("Trade Parameters Creation Error: ");
-    }
+			List<TradeParameters> tradeParametersList = searchEntity.get().getTradeParametersList();
 
-    private void createParameterEntity() {
-        ParameterEntity entity = new ParameterEntity();
-        entity.setTradeParametersList(new ArrayList<>());
-        tradeParameterRepository.save(entity);
-        log.warn("Parameter List Created");
-    }
+			try {
+				newParamList.removeAll(tradeParametersList);
+				Set<TradeParameters> temp = new HashSet<>(newParamList);
+				newParamList.clear();
+				newParamList.addAll(temp);
+				log.info("Adding the following Parameters for Calculation: [ " + newParamList + " ]");
+				tradeParametersList.addAll(newParamList);
+				searchEntity.get().setTradeParametersList(tradeParametersList);
+				tradeParameterRepository.save(searchEntity.get());
+			}
+			catch (Exception e) {
+				log.error("Unable to add Instrument due to : ", e);
+				throw new RuntimeException("Trade Parameter Addition Failure");
+			}
+		}
+		else
+			throw new RuntimeException("Trade Parameters Creation Error: ");
+	}
 
-    public void removeTradeParam(String tradeName){
-        TradeParameters param = new TradeParameters();
-        param.setParameterName(tradeName.toUpperCase());
+	private void createParameterEntity() {
+		ParameterEntity entity = new ParameterEntity();
+		entity.setTradeParametersList(new ArrayList<>());
+		tradeParameterRepository.save(entity);
+		log.warn("Parameter List Created");
+	}
 
-        log.info("Removing Instrument: " + tradeName.toUpperCase());
-        Optional<ParameterEntity> searchEntity = Optional.ofNullable(tradeParameterRepository.findParameterEntityByName(tradeParamListObject));
-        if(searchEntity.isEmpty()){
-            throw new RuntimeException("Trying to Delete on Application Startup");
-        }
+	public void removeTradeParam(String tradeName) {
+		TradeParameters param = new TradeParameters();
+		param.setParameterName(tradeName.toUpperCase());
 
-        List<TradeParameters> parametersList = searchEntity.get().getTradeParametersList();
-        log.info(" Before Removal the instrument list is : " + parametersList);
-        parametersList.remove(param);
-        log.info(" After Removal the instrument list is : " + parametersList);
-        searchEntity.get().setTradeParametersList(parametersList);
-        tradeParameterRepository.save(searchEntity.get());
-        log.info("Successfully Deleted: " + tradeName.toUpperCase());
-    }
+		log.info("Removing Instrument: " + tradeName.toUpperCase());
+		Optional<ParameterEntity> searchEntity = Optional
+				.ofNullable(tradeParameterRepository.findParameterEntityByName(tradeParamListObject));
+		if (searchEntity.isEmpty()) {
+			throw new RuntimeException("Trying to Delete on Application Startup");
+		}
 
-    public ParametersResponseDto getTradeParamList(){
+		List<TradeParameters> parametersList = searchEntity.get().getTradeParametersList();
+		log.info(" Before Removal the instrument list is : " + parametersList);
+		parametersList.remove(param);
+		log.info(" After Removal the instrument list is : " + parametersList);
+		searchEntity.get().setTradeParametersList(parametersList);
+		tradeParameterRepository.save(searchEntity.get());
+		log.info("Successfully Deleted: " + tradeName.toUpperCase());
+	}
 
-        Optional<ParameterEntity> entity = Optional.ofNullable(tradeParameterRepository.findParameterEntityByName(tradeParamListObject));
-        if(entity.isEmpty()){
-            log.warn("First time parameter addition");
-            createParameterEntity();
-            entity = Optional.ofNullable(tradeParameterRepository.findParameterEntityByName(tradeParamListObject));
-        }
-        log.info("Fetching Present Instrument List");
-        return parameterConverter.convertToParamResponseModel(entity);
-    }
+	public ParametersResponseDto getTradeParamList() {
 
-
+		Optional<ParameterEntity> entity = Optional
+				.ofNullable(tradeParameterRepository.findParameterEntityByName(tradeParamListObject));
+		if (entity.isEmpty()) {
+			log.warn("First time parameter addition");
+			createParameterEntity();
+			entity = Optional.ofNullable(tradeParameterRepository.findParameterEntityByName(tradeParamListObject));
+		}
+		log.info("Fetching Present Instrument List");
+		return parameterConverter.convertToParamResponseModel(entity);
+	}
 
 }

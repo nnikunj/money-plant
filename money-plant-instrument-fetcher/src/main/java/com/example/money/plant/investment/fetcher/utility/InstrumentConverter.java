@@ -26,7 +26,7 @@ public class InstrumentConverter {
 	}
 
 	public InstrumentResponseDto convertInstrumentEntityToModel(Optional<InstrumentEntity> entity) {
-		if(entity.isPresent()) {
+		if (entity.isPresent()) {
 			List<InstrumentModel> list = entity.get().getInstrumentList();
 			return new InstrumentResponseDto(list);
 		}

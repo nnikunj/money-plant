@@ -77,7 +77,8 @@ public class InstrumentFetcherService {
 				throw new RuntimeException("Instrument Addition Failure");
 			}
 		}
-		else throw new RuntimeException("Trade Parameters Creation Error: ");
+		else
+			throw new RuntimeException("Trade Parameters Creation Error: ");
 	}
 
 	public void removeInstrument(String stockName) {
