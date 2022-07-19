@@ -2,7 +2,8 @@
 
 ### Objective: 
 
-To Maintain the list of instruments on which we want to perform trades
+* To Maintain the list of instruments on which we want to perform trades(e.g NSE:INFY)
+* To Maintain the list of parameters on which we will do trades(e.g. MACD, Candle Data, etc)
 
 ### Build Steps: 
 

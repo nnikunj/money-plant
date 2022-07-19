@@ -24,7 +24,14 @@ public class InstrumentFetcherService {
 	private final String instrumentObjectName = "USER_INSTRUMENT_LIST";
 
 	public InstrumentResponseDto getInstrumentList() {
-		InstrumentEntity entity = instrumentRepository.findInstrumentEntityByName(instrumentObjectName);
+		Optional<InstrumentEntity> entity = Optional
+				.ofNullable(instrumentRepository.findInstrumentEntityByName(instrumentObjectName));
+
+		if (entity.isEmpty()) {
+			log.warn("First Time Entry: Creating Instrument Object");
+			createEntity();
+			entity = Optional.ofNullable(instrumentRepository.findInstrumentEntityByName(instrumentObjectName));
+		}
 		log.info("Fetching Present Instrument List");
 		return instrumentConverter.convertInstrumentEntityToModel(entity);
 	}
@@ -70,6 +77,7 @@ public class InstrumentFetcherService {
 				throw new RuntimeException("Instrument Addition Failure");
 			}
 		}
+		else throw new RuntimeException("Trade Parameters Creation Error: ");
 	}
 
 	public void removeInstrument(String stockName) {
@@ -88,15 +96,6 @@ public class InstrumentFetcherService {
 
 		List<InstrumentModel> alreadyPresentInstruments = entity.get().getInstrumentList();
 		log.info(" Before Removal the instrument list is : " + alreadyPresentInstruments);
-		// for (InstrumentModel instrumentModel : alreadyPresentInstruments) {
-		// log.info(instrumentModel.getName() + " : " + newModel.getName() + " : " +
-		// instrumentModel.equals(newModel)
-		// + " : " + instrumentModel.getName().equals(newModel.getName()));
-		// if (instrumentModel.getName().equals(newModel.getName())) {
-		// log.info("Instrument Entry found : [ " + search + " ]. Deleting it");
-		// alreadyPresentInstruments.remove(instrumentModel);
-		// }
-		// }
 		alreadyPresentInstruments.remove(newModel);
 		log.info(" After Removal the instrument list is : " + alreadyPresentInstruments);
 
