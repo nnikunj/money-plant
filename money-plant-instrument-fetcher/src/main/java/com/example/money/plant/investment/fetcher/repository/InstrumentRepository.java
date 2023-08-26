@@ -1,11 +1,18 @@
 package com.example.money.plant.investment.fetcher.repository;
 
 import com.example.money.plant.investment.fetcher.entity.InstrumentEntity;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.repository.query.Param;
+import com.example.money.plant.investment.fetcher.response.InstrumentResponse;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-public interface InstrumentRepository extends MongoRepository<InstrumentEntity, String> {
+import java.util.List;
+@Repository
+public interface InstrumentRepository extends JpaRepository<InstrumentEntity, Long> {
 
-	InstrumentEntity findInstrumentEntityByName(@Param("name") String name);
+    List<InstrumentEntity> findByName(String name);
+
+    @Query("SELECT new com.example.money.plant.investment.fetcher.response.InstrumentResponse(ie.instrument_token, ie.trading_symbol) FROM instrument_list ie WHERE ie.trading_symbol LIKE %:symbol%")
+    List<InstrumentResponse> findInstrumentDataBySymbol(String symbol);
 
 }

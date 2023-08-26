@@ -1,0 +1,6 @@
+com/example/rmqconnector/RmqUtils.class
+com/example/rmqconnector/QueuesConfig.class
+com/example/rmqconnector/ListenerConfig.class
+com/example/rmqconnector/QueuesConfigProperties.class
+com/example/rmqconnector/DataPlanePropertiesReferences.class
+com/example/rmqconnector/ClientConfigProperties.class

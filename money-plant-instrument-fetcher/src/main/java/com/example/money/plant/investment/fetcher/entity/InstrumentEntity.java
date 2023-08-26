@@ -1,30 +1,40 @@
 package com.example.money.plant.investment.fetcher.entity;
 
-import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.zerodhatech.models.Instrument;
+import lombok.NoArgsConstructor;
 
-import java.time.Instant;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Data
-@Document(collection = "instruments")
+
+@Entity(name = "instrument_list")
+@NoArgsConstructor
 public class InstrumentEntity {
-
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-	// TODO: Make this name configurable
-	private String name = "USER_INSTRUMENT_LIST";
 
-	private List<InstrumentModel> instrumentList;
+	public long instrument_token;
+	public long exchange_token;
+	public String trading_symbol;
 
-	@CreatedDate
-	protected Instant created;
+	public String name;
 
-	@LastModifiedDate
-	protected Instant modified;
+	public String instrument_type;
+	public String segment;
+	public String exchange;
+
+	public InstrumentEntity(long instrument_token, long exchange_token, String trading_symbol, String name, String instrument_type, String segment, String exchange) {
+		this.instrument_token = instrument_token;
+		this.exchange_token = exchange_token;
+		this.trading_symbol = trading_symbol;
+		this.name = name;
+		this.instrument_type = instrument_type;
+		this.segment = segment;
+		this.exchange = exchange;
+	}
 
 }
